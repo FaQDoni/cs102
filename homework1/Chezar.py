@@ -1,6 +1,17 @@
 def encrypt_caesar(plaintext: str) -> str:
+    """
+        >>> encrypt_caesar("PYTHON")
+        'SBWKRQ'
+        >>> encrypt_caesar("python")
+        'sbwkrq'
+        >>> encrypt_caesar("Python3.6")
+        'Sbwkrq3.6'
+        >>> encrypt_caesar("")
+        ''
+        """
 
-	for i in plaintext:
+
+    for i in plaintext:
 
 		x=ord(i)
 		if (x>64 and x<123):
@@ -14,7 +25,19 @@ def encrypt_caesar(plaintext: str) -> str:
 
 def decrypt_caesar(ciphertext: str) -> str:
 
-	for i in ciphertext:
+    """
+        >>> decrypt_caesar("SBWKRQ")
+        'PYTHON'
+        >>> decrypt_caesar("sbwkrq")
+        'python'
+        >>> decrypt_caesar("Sbwkrq3.6")
+        'Python3.6'
+        >>> decrypt_caesar("")
+        ''
+        """
+
+
+    for i in ciphertext:
 
 		x=ord(i)
 		if (x>64 and x<123):
