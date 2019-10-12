@@ -15,7 +15,7 @@ def encrypt_vigenere(ciphertext: str, keyword: str) -> str:
     j=0
     for i in range(Length):
         if j==Length2:
-              j=0
+            j=0
 
         x=ord(ciphertext[i])
         if (x>64 and x<123):
