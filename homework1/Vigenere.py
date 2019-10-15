@@ -1,67 +1,38 @@
-def encrypt_vigenere(ciphertext: str, keyword: str) -> str:
+def encrypt_vigenere(plaintext, keyword):
     """
-       >>> encrypt_vigenere("PYTHON", "A")
-       'PYTHON'
-       >>> encrypt_vigenere("python", "a")
-       'python'
-       >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
-       'LXFOPVEFRNHR'
-       """
+    Encrypts plaintext using a Vigenere cipher.
+    >>> encrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> encrypt_vigenere("python", "a")
+    'python'
+    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
+    'LXFOPVEFRNHR'
+    """
+    ciphertext = ''
+    for index, char in enumerate(plaintext):
+        sub = char
 
+        if 'A' <= char <= 'z':
+            change = ord(keyword[index % len(keyword)])
+            change -= ord('a') if 'a' <= char <= 'z' else ord('A')
 
-    ciphertext2=""
-    Length=len(ciphertext)
-    Length2=len(keyword)
-    j=0
-    for i in range(Length):
-        if j==Length2:
-            j=0
+            symbol = ord(char) + change
 
-        x=ord(ciphertext[i])
-        if (x>64 and x<123):
-            if (x<91):
-                if ord(keyword[j])<91:
-                    y=ord(keyword[j])-65
-                else:
-                    y=ord(keyword[j])-97
-                Letter=x+y
-                if (Letter>90 and Letter<117):
-                    Letter=Letter-26
-            else:
-                if ord(keyword[j])<91:
-                    y=ord(keyword[j])-65
-                else:
-                    y=ord(keyword[j])-97
-                Letter=x+y
-                if Letter>122:
-                    Letter=Letter-26
-            y=chr(Letter)
+            if 'a' <= char <= 'z' and symbol > ord('z'):
+                symbol -= 26
 
-            ciphertext2=ciphertext2 + y
+            elif 'A' <= char <= 'Z' and symbol > ord('Z'):
+                symbol -= 26
 
-
-
-            j=j+1
-
-
-
-
-    ciphertext=ciphertext2
-    print(ciphertext)
-
-
-
+            sub = chr(symbol)
+        ciphertext += sub
 
     return ciphertext
 
-encrypt_vigenere("PYTHON", "A")
-encrypt_vigenere("python", "a")
-encrypt_vigenere("ATTACKATDAWN", "LEMON")
 
-
-def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
-
+def decrypt_vigenere(ciphertext, keyword):
     """
+    Decrypts a ciphertext using a Vigenere cipher.
     >>> decrypt_vigenere("PYTHON", "A")
     'PYTHON'
     >>> decrypt_vigenere("python", "a")
@@ -69,49 +40,23 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
     'ATTACKATDAWN'
     """
+    plaintext = ''
+    for index, char in enumerate(ciphertext):
+        sub = char
 
+        if 'A' <= char <= 'z':
+            change = ord(keyword[index % len(keyword)])
+            change -= ord('a') if 'a' <= char <= 'z' else ord('A')
 
-    ciphertext2=""
-    Length=len(ciphertext)
-    Length2=len(keyword)
-    j=0
-    for i in range(Length):
-        if j==Length2:
-            j=0
+            symbol = ord(char) - change
 
-        x=ord(ciphertext[i])
-        if (x>64 and x<123):
-            if (x<91):
-                if ord(keyword[j])<91:
-                    y=ord(keyword[j])-65
-                else:
-                    y=ord(keyword[j])-97
-                Letter=x-y
-                if (Letter<65):
-                    Letter=Letter+26
-            else:
-                if ord(keyword[j])<91:
-                    y=ord(keyword[j])-65
-                else:
-                    y=ord(keyword[j])-97
-                Letter=x-y
-                if Letter<91:
-                    Letter=Letter+26
-            y=chr(Letter)
+            if 'a' <= char <= 'z' and symbol < ord('a'):
+                symbol += 26
 
-            ciphertext2=ciphertext2 + y
+            elif 'A' <= char <= 'Z' and symbol < ord('A'):
+                symbol += 26
 
+            sub = chr(symbol)
+        plaintext += sub
 
-
-            j=j+1
-
-
-
-
-    ciphertext=ciphertext2
-    print(ciphertext)
-
-    return ciphertext
-decrypt_vigenere("PYTHON", "A")
-decrypt_vigenere("python", "a")
-decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
+    return plaintext
