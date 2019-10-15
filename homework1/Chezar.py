@@ -1,52 +1,56 @@
-def encrypt_caesar(plaintext: str) -> str:
+def encrypt_caesar(plaintext, shift):
     """
-    »> encrypt_caesar("PYTHON")
+    Encrypts plaintext using a Caesar cipher.
+    >>> encrypt_caesar("PYTHON", 3)
     'SBWKRQ'
-    »> encrypt_caesar("python")
+    >>> encrypt_caesar("python", 3)
     'sbwkrq'
-    »> encrypt_caesar("Python3.6")
+    >>> encrypt_caesar("Python3.6", 3)
     'Sbwkrq3.6'
-    »> encrypt_caesar("")
+    >>> encrypt_caesar("", 3)
     ''
     """
+    ciphertext = ""
+    for char in plaintext:
+        if "A" <= char <= "z":
+            symbol = ord(char) + shift % 26
 
-    for i in plaintext:
+            if "A" <= char <= "Z" < chr(symbol):
+                symbol -= 26
 
-        x=ord(i)
-        if (x>64 and x<123):
-            if (x>87 and x<91) or (x<123 and x>119):
-                x=x-26
-            y=chr(x+3)
-            plaintext=plaintext.replace(i, y)
-    print(plaintext)
-    return plaintext
+            elif chr(symbol) > "z":
+                symbol -= 26
 
+            char = chr(symbol)
+        ciphertext += char
 
-def decrypt_caesar(ciphertext: str) -> str:
-    """
-    »> decrypt_caesar("SBWKRQ")
-
-    'PYTHON'
-    »> decrypt_caesar("sbwkrq")
-    'python'
-    »> decrypt_caesar("Sbwkrq3.6")
-    'Python3.6'
-    »> decrypt_caesar("")
-    ''
-    """
-    for i in ciphertext:
-        x=ord(i)
-        if (x>64 and x<123):
-            if (x<68 and x<91) or (x<100 and x>96):
-                x=x+26
-            y=chr(x-3)
-            ciphertext=ciphertext.replace(i, y)
-    print(ciphertext)
     return ciphertext
 
-encrypt_caesar("PYTHON")
-encrypt_caesar("python")
-encrypt_caesar("Python3.6")
-decrypt_caesar("SBWKRQ")
-decrypt_caesar("sbwkrq")
-decrypt_caesar("Sbwkrq3.6")
+
+def decrypt_caesar(ciphertext, shift):
+    """
+     Decrypts a ciphertext using a Caesar cipher.
+     >>> decrypt_caesar("SBWKRQ", 3)
+     'PYTHON'
+     >>> decrypt_caesar("sbwkrq", 3)
+     'python'
+     >>> decrypt_caesar("Sbwkrq3.6", 3)
+     'Python3.6'
+     >>> decrypt_caesar("", 3)
+     ''
+     """
+    plaintext = ""
+    for char in ciphertext:
+        if "A" <= char <= "z":
+            enc = ord(char) - shift % 26
+
+            if enc < ord("A"):
+                enc += 26
+
+            if "a" <= char <= "z" and enc < ord("a"):
+                enc += 26
+
+            char = chr(enc)
+        plaintext += char
+
+    return plaintext
