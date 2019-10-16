@@ -12,6 +12,8 @@ def is_prime(n):
     False
     """
     if n > 1:
+        if (n > 2 & n % 2 == 0):
+            return False
         for i in range(2, round(n ** 0.5)):
             if (n % i) == 0:
                 return False
@@ -122,4 +124,4 @@ if __name__ == '__main__':
     print(''.join(map(lambda x: str(x), encrypted_msg)))
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
-    print(decrypt(public, encrypted_m
+    print(decrypt(public, encrypted_m))
