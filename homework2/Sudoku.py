@@ -1,4 +1,3 @@
-import time
 import random
 from typing import Tuple, List, Set, Optional
 
@@ -180,7 +179,6 @@ def generate_sudoku(N: int) -> List[List[str]]:
 if __name__ == '__main__':
     for fname in ['puzzle1.txt', 'puzzle2.txt', 'puzzle3.txt']:
         print(f'Solving {fname} sudoku...')
-        start_time = time.time()
         grid = read_sudoku(fname)
         solution = solve(grid)
         correct_solution = check_solution(solution)
