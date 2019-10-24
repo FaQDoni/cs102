@@ -29,7 +29,7 @@ def group(values: List[str], n: int) -> List[List[str]]:
     >>> group([1,2,3,4,5,6,7,8,9], 3)
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     """
-    return [[values[rows + i] for i in range(n)] for rows in range(0, values.__len__(), n)]
+    return [[values[rows + i] for i in range(n)] for rows in range(0, values.len(), n)]
 
 
 def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
